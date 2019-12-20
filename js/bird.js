@@ -15,11 +15,22 @@ var started = false
 
 function runGame(){
     timer = setInterval(() => {
+        if(bird.position.y >= 650){
+            window.clearInterval(timer)
+        }
+
         if(started){
-            if(upButtonPressed)
-                up()
-            else
+            if(upButtonPressed){
+                if(bird.position.y <= 50){
+                    upButtonPressed = false
+                }
+                else{
+                    up()
+                } 
+            }
+            else{
                 down()
+            }
             
             barriers.animate()
         }
@@ -44,8 +55,11 @@ function down(){
     runGame()
 })()
 
-div.onclick = (e) => {
+function click(){
     if(!started) started = true
 
     upButtonPressed = true
 }
+
+div.onclick = click
+window.onkeydown = click

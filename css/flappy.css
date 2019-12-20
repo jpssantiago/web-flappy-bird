@@ -22,7 +22,7 @@ div[wm-flappy] > img{
     -khtml-user-select: none;
     -webkit-user-select: none;
     -o-user-select: none;
-    /* top: calc(100vh / 2.5); */
+    z-index: 2;
 }
 
 .pair{

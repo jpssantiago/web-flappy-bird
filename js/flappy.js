@@ -1,3 +1,7 @@
+function notificatePoint(){
+    console.log('notification.')
+}
+
 function newElement(tagName, className){
     const element = document.createElement(tagName)
     element.className = className
@@ -69,6 +73,6 @@ function Barriers(height, width, opening, distance, notificatePoint){
     }
 }
 
-var barriers = new Barriers(700, 1200, 200, 440)
+var barriers = new Barriers(700, 1200, 200, 440, notificatePoint)
 const gameArea = document.querySelector('[wm-flappy]')
 barriers.pairs.forEach(pair => gameArea.appendChild(pair.element))
