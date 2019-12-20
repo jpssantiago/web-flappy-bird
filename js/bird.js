@@ -1,65 +1,69 @@
-const div = document.querySelector('div[wm-flappy]')
-const img = div.children[0]
-const upSpeed = 60
-const downSpeed = 2
-const bird = {
-    position: {
-        x: 150,
-        y: 380,
+// TODO: improve the bird's animation.
+
+function Bird(gameHeight = 700){
+    this.element = newElement('img', 'bird')
+    this.element.src = 'imgs/bird.png'
+    
+    this.getY = () => parseInt(this.element.style.bottom.split('px')[0])
+    this.setY = y => this.element.style.bottom = `${y}px`
+
+    let upReady = false
+    let delayToFall = 0
+    window.onkeydown = () => upReady = true
+    window.onclick = () => upReady = true
+
+    const up = () => {
+        rotate(-40)
+        this.setY(this.getY() + 40)
+        delayToFall = 10
     }
-}
-let timer = 0
-let upButtonPressed = false
 
-var started = false
-
-function runGame(){
-    timer = setInterval(() => {
-        if(bird.position.y >= 650){
-            window.clearInterval(timer)
+    const down = () => {
+        if(delayToFall == 0){
+            rotate(40)
+            this.setY(this.getY() - 5)
         }
+        else{
+            delayToFall -= 1
+        }
+    }
 
-        if(started){
-            if(upButtonPressed){
-                if(bird.position.y <= 50){
-                    upButtonPressed = false
-                }
-                else{
-                    up()
-                } 
-            }
-            else{
+    const rotate = angle => {
+        this.element.style.webkitTransform = `rotate(${angle}deg)`; 
+        this.element.style.mozTransform    = `rotate(${angle}deg)`; 
+        this.element.style.msTransform     = `rotate(${angle}deg)`; 
+        this.element.style.oTransform      = `rotate(${angle}deg)`; 
+        this.element.style.transform       = `rotate(${angle}deg)`; 
+    }
+
+    this.animate = () => {
+        const maxHeight = gameHeight - this.element.clientHeight
+        
+        if(this.getY() - 5 <= 0){
+            this.setY(0)
+            // game over
+        }
+        else if(this.getY() + 20 >= maxHeight){
+            this.setY(maxHeight - 30)
+        }
+        else{
+            if(upReady)
+                up()
+            else
                 down()
-            }
-            
-            barriers.animate()
+
+            upReady = false
         }
-    }, 20)
+    }
+
+    this.setY(gameHeight / 2)
 }
 
-function up(){
-    //window.clearInterval(timer)
+function Progress(){
+    this.element = newElement('span', 'progress')
+    this.updateScore = points => {
+        this.element.innerHTML = points
+    }
 
-    img.style.top = `${bird.position.y - upSpeed}px`
-    bird.position.y -= upSpeed
-
-    upButtonPressed = false
+    this.updateScore(0)
 }
-
-function down(){
-    img.style.top = `${bird.position.y + downSpeed}px`
-    bird.position.y += downSpeed
-}
-
-(function(){
-    runGame()
-})()
-
-function click(){
-    if(!started) started = true
-
-    upButtonPressed = true
-}
-
-div.onclick = click
-window.onkeydown = click
