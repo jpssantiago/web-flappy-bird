@@ -30,7 +30,7 @@ function checkCollision(bird, barriers){
 function Game(){
     let points = 0
 
-    const gameArea = document.querySelector('[wm-flappy]')
+    const gameArea = document.querySelector('[jps-flappy]')
     const height = gameArea.clientHeight
     const width = gameArea.clientWidth
 
