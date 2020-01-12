@@ -47,11 +47,7 @@ function Bird(gameHeight = 700){
             this.setY(maxHeight - 30)
         }
         else{
-            if(upReady)
-                up()
-            else
-                down()
-
+            upReady ? up() : down()
             upReady = false
         }
     }
