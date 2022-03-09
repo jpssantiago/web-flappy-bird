@@ -7,22 +7,9 @@ Flappy Bird made with HTML, CSS, and JS.
 Clone this repository.
 
 ```bash
-git clone https://github.com/jpssantiago/portfolio
+git clone https://github.com/jpssantiago/web-flappy-bird.git
 ```
-
-Install dependencies
-
-```bash
-yarn
-(or npm i)
-```
-
-Enjoy :)
-
-```bash
-yarn start
-(or npm start)
-```
+Run on browser :)
 
 <!--## Images -->
 <img src="assets/readme_images/readme_image_0.png" alt="drawing" width="200"/>
