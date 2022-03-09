@@ -50,6 +50,12 @@ function Game(){
             if(checkCollision(bird, barriers)){
                 clearInterval(timer)
                 console.log('Collision detected. Game over!')
+
+                alert('Restarting game in 2 seconds...')
+
+                setTimeout(() => {
+                    window.location.reload()
+                }, 2000);
             }
         }, 20)
     }
